@@ -45,10 +45,7 @@ router.post(
       );
 
       const task = result.rows[0];
-      res.status(201).json({
-        message: "Task created successfully",
-        task,
-      });
+      res.status(201).json(task);
     } catch (error) {
       next(error);
     }
@@ -65,10 +62,7 @@ router.get("/", requireAuth, async (req, res, next) => {
       [userId]
     );
 
-    res.json({
-      message: "Tasks retrieved successfully",
-      tasks: result.rows,
-    });
+    res.json(result.rows);
   } catch (error) {
     next(error);
   }
@@ -108,10 +102,7 @@ router.put(
       );
 
       const task = result.rows[0];
-      res.json({
-        message: "Task updated successfully",
-        task,
-      });
+      res.json(task);
     } catch (error) {
       next(error);
     }
@@ -146,11 +137,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
       [id, userId]
     );
 
-    const task = result.rows[0];
-    res.json({
-      message: "Task deleted successfully",
-      task,
-    });
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
