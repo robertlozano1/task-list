@@ -1,5 +1,18 @@
 import express from "express";
+
 const app = express();
+
+// Middleware for parsing JSON
+app.use(express.json());
+
+// Import routers
+import usersRouter from "./routes/users.js";
+import tasksRouter from "./routes/tasks.js";
+
+// Mount routers
+app.use("/users", usersRouter);
+app.use("/tasks", tasksRouter);
+
 export default app;
 
 app.use((err, req, res, next) => {
